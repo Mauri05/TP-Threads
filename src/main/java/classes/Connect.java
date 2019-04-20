@@ -91,4 +91,41 @@ public class Connect {
             e.printStackTrace();
         }
     }
+
+    public static void setWinner(String name, String word){
+        try {
+            conn = DriverManager.getConnection(url + dbName, user, pass);
+            Class.forName(driver);
+            int id = getWordId(word);
+            String query = "insert into winners (name, win_date, id_word) values ('"+name+"',now(),"+id+");";
+            Statement st = null;
+            st = conn.createStatement();
+            st.executeUpdate(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static int getWordId(String wordParam){
+        int wordID = 0;
+        try {
+            conn = DriverManager.getConnection(url + dbName, user, pass);
+            Class.forName(driver);
+            PreparedStatement ps = null;
+            ps = conn.prepareStatement("select * from words where word = '"+wordParam+"';");
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                wordID = rs.getInt("id_word");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return wordID;
+    }
+
 }
