@@ -1,5 +1,6 @@
 
 import classes.Connect;
+import classes.Game;
 import classes.Player;
 
 public class Main {
@@ -7,6 +8,7 @@ public class Main {
 
         Thread p1 = new Player("Mauri",20);
         Thread p2 = new Player("Pepe",35);
+        Game.setInitialGame();
         p1.start();
         p2.start();
     }
