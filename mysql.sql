@@ -4,7 +4,7 @@ use ahorcado;
 create table words(
     id_word int auto_increment,
     word varchar(50),
-    constraint  pk_id_word primary key (id_word),
+    constraint pk_id_word primary key (id_word),
     constraint unq_word unique (word)
 );
 
@@ -16,3 +16,5 @@ create table winners(
     constraint pk_id_winner primary key (id_winner),
     constraint fk_id_word foreign key (id_word) references words (id_word)
 );
+
+insert into words(word) values ("programacion"),("threads"),("argentina"),("temaiken"),("skere");
